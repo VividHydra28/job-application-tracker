@@ -1,4 +1,17 @@
-<<<<<<< HEAD
+# Job Application Tracker
+
+A React application for tracking job applications, interviews, offers and application outcomes.
+
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -74,18 +87,5 @@ export default defineConfig([
 ])
 
 ```
-=======
+========================================================================================
 
-# Job Application Tracker
-
-A React application for tracking job applications, interviews, offers and application outcomes.
-
-## Tech Stack
-
-- React
-- TypeScript
-- Vite
-
-# job-application-tracker
-Tracks the status of job applications
->>>>>>> bf7922b684574edf87f8473501a3696e76f55e3a

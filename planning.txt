@@ -1,13 +1,13 @@
 Job Application model:
-├── id
-├── company
-├── position
-├── location
-├── status
-├── dateApplied
-├── jobUrl
-├── salary
-└── notes
+id
+ company
+ position
+ location
+ status
+ dateApplied
+ jobUrl
+ salary
+notes
 
 Status model:
 Applied

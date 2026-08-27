@@ -5,6 +5,7 @@ import type { JobApplication, ApplicationStatus } from "../types/application";
 // import type { JobApplication, ApplicationStatus, ApplicationDate } from "../types/application";
 import ApplicationForm from "../components/ApplicationForm";
 
+//------------------------------------------END OF IMPORTS--------------------------------------------//
 
 // This component displays a list of job applications and allows the user to clear the list.
 function Applications() {
@@ -13,6 +14,7 @@ function Applications() {
   const [applications, setApplications] =
     useState<JobApplication[]>(mockApplications);
 
+  // This function handles adding a new application to the list.
   function handleAddApplication(applicationData: {
     company: string;
     position: string;
@@ -22,7 +24,9 @@ function Applications() {
     jobUrl: string;
     salary: string;
     notes: string;
-  }) {
+  }) 
+  // These lines create a new application object with a unique ID and add it to the state.
+  {
     const newApplication: JobApplication = {
       id: crypto.randomUUID(),
       ...applicationData,

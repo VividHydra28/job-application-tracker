@@ -1,8 +1,10 @@
 import { useState } from "react";
 import ApplicationCard from "../components/ApplicationCard";
 import { mockApplications } from "../utils/mockApplications";
-import type { JobApplication } from "../types/application";
+import type { JobApplication, ApplicationStatus } from "../types/application";
+// import type { JobApplication, ApplicationStatus, ApplicationDate } from "../types/application";
 import ApplicationForm from "../components/ApplicationForm";
+
 
 // This component displays a list of job applications and allows the user to clear the list.
 function Applications() {
@@ -11,11 +13,34 @@ function Applications() {
   const [applications, setApplications] =
     useState<JobApplication[]>(mockApplications);
 
+  function handleAddApplication(applicationData: {
+    company: string;
+    position: string;
+    location: string;
+    status: ApplicationStatus;
+    dateApplied: string; //ApplicationDate; //used to be a string
+    jobUrl: string;
+    salary: string;
+    notes: string;
+  }) {
+    const newApplication: JobApplication = {
+      id: crypto.randomUUID(),
+      ...applicationData,
+    };
+
+    setApplications((currentApplications) => [
+      ...currentApplications,
+      newApplication,
+    ]);
+  }
+
   return (
     <main>
       <h1>Applications</h1>
 
       <p>View and manage your job applications.</p>
+
+      <ApplicationForm onSubmit={handleAddApplication} />
 
       <section>
         {/* Render a list of ApplicationCard components for each application in the state. */}
@@ -26,17 +51,19 @@ function Applications() {
           />
         ))}
       </section>
-
-          <button
-      onClick={() => {
-        setApplications([]);
-      }}
-    >
-      Clear Applications
-    </button>
+          
+      <button
+        onClick={() => {
+          setApplications([]);
+        }}
+      >
+        Clear Applications
+      </button>
     </main>
   );
 }
+
+
 
 
 

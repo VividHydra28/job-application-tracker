@@ -1,5 +1,6 @@
 import { useState } from "react";
-import type { ApplicationStatus } from "../types/application";
+import type {ApplicationStatus } from "../types/application";
+// import type { ApplicationDate, ApplicationStatus } from "../types/application";
 
 interface ApplicationFormProps {
   onSubmit: (application: {
@@ -7,7 +8,7 @@ interface ApplicationFormProps {
     position: string;
     location: string;
     status: ApplicationStatus;
-    dateApplied: string;
+    dateApplied: string; //string
     jobUrl: string;
     salary: string;
     notes: string;

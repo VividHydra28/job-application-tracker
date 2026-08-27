@@ -9,7 +9,7 @@ export type ApplicationStatus =
   | "Withdrawn";
 
 // This type defines the format of a date string in the format "YYYY-MM-DD".
-type ApplicationDate = `${number}-${number}-${number}`;
+//export type ApplicationDate = `${number}-${number}-${number}`;
 
 // This interface defines the structure of a job application object.
 export interface JobApplication {
@@ -18,7 +18,7 @@ export interface JobApplication {
   position: string;
   location: string;
   status: ApplicationStatus;
-  dateApplied: ApplicationDate; //used to be a string
+  dateApplied: string; //used to be a string
   jobUrl?: string;
   salary?: string;
   notes?: string;

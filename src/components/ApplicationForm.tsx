@@ -80,6 +80,7 @@ function ApplicationForm({ onSubmit }: ApplicationFormProps) {
             setStatus(event.target.value as ApplicationStatus)
           }
         >
+          <option value=" - "> - </option>
           <option value="Applied">Applied</option>
           <option value="Screening">Screening</option>
           <option value="Interview">Interview</option>

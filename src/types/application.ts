@@ -1,6 +1,7 @@
 
 // This obj defines the types.
 export type ApplicationStatus =
+  | " - "
   | "Applied"
   | "Screening"
   | "Interview"

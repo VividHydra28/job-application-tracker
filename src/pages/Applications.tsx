@@ -38,6 +38,15 @@ function Applications() {
     ]);
   }
 
+  // This function handles deleting an application from the list by filtering it out based on its ID.
+  function handleDeleteApplication(id: string) {
+  setApplications((currentApplications) =>
+    currentApplications.filter(
+      (application) => application.id !== id
+    )
+  );
+}
+
   return (
     <main>
       <h1>Applications</h1>
@@ -52,6 +61,9 @@ function Applications() {
           <ApplicationCard
             key={application.id}
             application={application}
+            onDelete={handleDeleteApplication}
+            //Edit={handleEditApplication}
+           // onDelete={setApplications}//
           />
         ))}
       </section>

@@ -3,9 +3,17 @@ import StatusBadge from "./StatusBadge";
 
 interface ApplicationCardProps {
   application: JobApplication;
+  onDelete: (id: string) => void;
+  //Edit: () => void;
 }
 
-function ApplicationCard({ application }: ApplicationCardProps) {
+// This component displays a card with the details of a job application.
+function ApplicationCard(
+  { application, 
+    onDelete 
+  }: 
+  ApplicationCardProps) 
+  {
   return (
     <article>
       <h2>{application.company}</h2>
@@ -17,6 +25,11 @@ function ApplicationCard({ application }: ApplicationCardProps) {
       <StatusBadge status={application.status} />
 
       <p>Applied: {application.dateApplied}</p>
+
+    <button onClick={() => onDelete(application.id)}>
+        Delete
+      </button>
+
     </article>
   );
 }

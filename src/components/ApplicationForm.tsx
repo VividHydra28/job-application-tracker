@@ -26,9 +26,28 @@ function ApplicationForm({ onSubmit }: ApplicationFormProps) {
   const [salary, setSalary] = useState("");
   const [notes, setNotes] = useState("");
 
+  // This function resets the form fields to their initial state.
+  function resetForm() {
+
+    setCompany("");
+    setPosition("");
+    setLocation("");
+    setStatus("Applied");
+    setDateApplied("");
+    setJobUrl("");
+    setSalary("");
+    setNotes("");
+  }
+
   function handleSubmit(event: React.FormEvent) {
+    // Prevent the default form submission behavior to avoid page reload.
     event.preventDefault();
 
+    // Error handling suggestion: validate required fields here and show field-level
+    // messages before passing the data to the parent component.
+
+    // Error handling suggestion: wrap this callback in try/catch if onSubmit later
+    // saves to an API or another service that can reject the submission.
     onSubmit({
       company,
       position,
@@ -39,10 +58,14 @@ function ApplicationForm({ onSubmit }: ApplicationFormProps) {
       salary,
       notes,
     });
+    // Clear the form fields after submission
+    resetForm();
   }
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* Error handling suggestion: add noValidate only if replacing native browser
+        validation with custom validation and an accessible error summary. */}
       <div>
         <label htmlFor="company">Company</label>
         <input

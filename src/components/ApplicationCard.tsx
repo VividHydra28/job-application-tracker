@@ -1,9 +1,13 @@
 import type { JobApplication } from "../types/application";
 import StatusBadge from "./StatusBadge";
 
+//----------------------------END OF IMPORTS--------------------------------------------//
+
+// This interface defines the props for the ApplicationCard component.
 interface ApplicationCardProps {
   application: JobApplication;
   onDelete: (id: string) => void;
+  Edit: (id: string) => void;
   //Edit: () => void;
 }
 

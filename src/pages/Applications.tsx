@@ -47,6 +47,14 @@ function Applications() {
   );
 }
 
+  function handleEditApplication(id: string) {
+    setApplications((currentApplications) =>
+      currentApplications.filter(
+        (application) => application.id !== id
+      )
+    );
+  }
+
   return (
     <main>
       <h1>Applications</h1>
@@ -62,7 +70,7 @@ function Applications() {
             key={application.id}
             application={application}
             onDelete={handleDeleteApplication}
-            //Edit={handleEditApplication}
+            Edit={handleEditApplication}
            // onDelete={setApplications}//
           />
         ))}

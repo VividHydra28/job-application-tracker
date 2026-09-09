@@ -2,6 +2,8 @@ import type { ApplicationStatus } from "../types/application";
 
 //------------------------------END OF IMPORTS--------------------------------------------//  
 
+
+// This interface defines the props for the StatusBadge component.
 interface StatusBadgeProps {
   status: ApplicationStatus;
 }

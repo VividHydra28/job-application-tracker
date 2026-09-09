@@ -14,6 +14,9 @@ function Applications() {
   const [applications, setApplications] =
     useState<JobApplication[]>(mockApplications);
 
+    const [editingApplication, setEditingApplication] =
+  useState<JobApplication | null>(null);
+
   // This function handles adding a new application to the list.
   function handleAddApplication(applicationData: {
     company: string;
@@ -46,7 +49,7 @@ function Applications() {
     )
   );
 }
-
+  /*
   function handleEditApplication(id: string) {
     setApplications((currentApplications) =>
       currentApplications.filter(
@@ -54,6 +57,11 @@ function Applications() {
       )
     );
   }
+    */
+  // This function handles editing an existing application by updating its details in the state.
+  function handleEditApplication(application: JobApplication) {
+  setEditingApplication(application);
+}
 
   return (
     <main>
@@ -70,10 +78,13 @@ function Applications() {
             key={application.id}
             application={application}
             onDelete={handleDeleteApplication}
-            Edit={handleEditApplication}
+            onEdit={handleEditApplication}
            // onDelete={setApplications}//
           />
         ))}
+        {editingApplication && (
+          <p>Editing: {editingApplication.company}</p>
+        )}
       </section>
           
       <button

@@ -14,6 +14,7 @@ function Applications() {
   const [applications, setApplications] =
     useState<JobApplication[]>(mockApplications);
 
+    // Initialize the state for the application currently being edited, if any.
     const [editingApplication, setEditingApplication] =
   useState<JobApplication | null>(null);
 
@@ -69,7 +70,11 @@ function Applications() {
 
       <p>View and manage your job applications.</p>
 
-      <ApplicationForm onSubmit={handleAddApplication} />
+      {/* Render the ApplicationForm component, passing the handleAddApplication function as a prop. */}
+      <ApplicationForm
+        onSubmit={handleAddApplication}
+        editingApplication={editingApplication}
+      />
 
       <section>
         {/* Render a list of ApplicationCard components for each application in the state. */}

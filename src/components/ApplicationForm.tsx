@@ -1,7 +1,11 @@
-import { useState } from "react";
-import type {ApplicationStatus } from "../types/application";
+import { useEffect, useState } from "react";
+import type {ApplicationStatus, JobApplication } from "../types/application";
 // import type { ApplicationDate, ApplicationStatus } from "../types/application";
 
+
+//----------------------------END OF IMPORTS-----------------------------------------------//
+
+// This interface defines the props for the ApplicationForm component.
 interface ApplicationFormProps {
   onSubmit: (application: {
     company: string;
@@ -13,9 +17,15 @@ interface ApplicationFormProps {
     salary: string;
     notes: string;
   }) => void;
-}
 
-function ApplicationForm({ onSubmit }: ApplicationFormProps) {
+   editingApplication: JobApplication | null;
+}
+// This component renders a form for adding a new job application.
+function ApplicationForm({ 
+  onSubmit, 
+  editingApplication 
+
+}: ApplicationFormProps) {
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
   const [location, setLocation] = useState("");
@@ -25,6 +35,20 @@ function ApplicationForm({ onSubmit }: ApplicationFormProps) {
   const [jobUrl, setJobUrl] = useState("");
   const [salary, setSalary] = useState("");
   const [notes, setNotes] = useState("");
+
+  // This effect runs whenever the editingApplication prop changes. If there is an application being edited, it populates the form fields with the existing data.
+  useEffect(() => {
+  if (editingApplication) {
+    setCompany(editingApplication.company);
+    setPosition(editingApplication.position);
+    setLocation(editingApplication.location);
+    setStatus(editingApplication.status);
+    setDateApplied(editingApplication.dateApplied);
+    setJobUrl(editingApplication.jobUrl ?? "");
+    setSalary(editingApplication.salary ?? "");
+    setNotes(editingApplication.notes ?? "");
+  }
+}, [editingApplication]);
 
   // This function resets the form fields to their initial state.
   function resetForm() {
@@ -38,6 +62,8 @@ function ApplicationForm({ onSubmit }: ApplicationFormProps) {
     setSalary("");
     setNotes("");
   }
+
+  
 
   function handleSubmit(event: React.FormEvent) {
     // Prevent the default form submission behavior to avoid page reload.

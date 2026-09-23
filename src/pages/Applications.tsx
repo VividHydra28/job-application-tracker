@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ApplicationCard from "../components/ApplicationCard";
 import { mockApplications } from "../utils/mockApplications";
 import type { JobApplication, ApplicationStatus } from "../types/application";
 // import type { JobApplication, ApplicationStatus, ApplicationDate } from "../types/application";
 import ApplicationForm from "../components/ApplicationForm";
+import {getApplications,saveApplications} from "../services/applicationStorage";
 
 //------------------------------------------END OF IMPORTS--------------------------------------------//
 
@@ -11,12 +12,28 @@ import ApplicationForm from "../components/ApplicationForm";
 function Applications() {
 
   // Initialize the state for the list of applications using mock data.
+  /*
   const [applications, setApplications] =
     useState<JobApplication[]>(mockApplications);
+    */
+
+    // Initialize the state for the list of applications using data from local storage or mock data if none exists.
+   const [applications, setApplications] =
+  useState<JobApplication[]>(() => {
+    const savedApplications = getApplications();
+
+    return savedApplications.length > 0
+      ? savedApplications
+      : mockApplications;
+  });
 
     // Initialize the state for the application currently being edited, if any.
     const [editingApplication, setEditingApplication] =
   useState<JobApplication | null>(null);
+
+  useEffect(() => {
+  saveApplications(applications);
+}, [applications]);
 
   // This function handles adding a new application to the list.
   function handleAddApplication(applicationData: {

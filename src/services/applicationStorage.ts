@@ -36,6 +36,7 @@ export default function applicationStorage(): {
 }
   */
 
+// This function returns an object containing the getApplications and saveApplications functions, allowing other parts of the application to interact with local storage for job applications.
 export default function applicationStorage() {
   return {
     getApplications,

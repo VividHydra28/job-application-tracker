@@ -29,19 +29,23 @@ function Applications() {
     salary: string;
     notes: string;
   }) 
-  // These lines create a new application object with a unique ID and add it to the state.
-  {
-    const newApplication: JobApplication = {
-      id: crypto.randomUUID(),
-      ...applicationData,
-    };
-
-    setApplications((currentApplications) => [
-      ...currentApplications,
-      newApplication,
-    ]);
+    {
+  if (!editingApplication) {
+    return;
   }
+ setApplications((currentApplications) =>
+    currentApplications.map((application) =>
+      application.id === editingApplication.id
+        ? {
+            ...application,
+            ...applicationData,
+          }
+        : application
+    )
+  );
 
+  setEditingApplication(null);
+}
   // This function handles deleting an application from the list by filtering it out based on its ID.
   function handleDeleteApplication(id: string) {
   setApplications((currentApplications) =>

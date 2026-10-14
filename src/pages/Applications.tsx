@@ -17,14 +17,12 @@ function Applications() {
     useState<JobApplication[]>(mockApplications);
     */
    
-    // Initialize the state for the list of applications using data from local storage or mock data if none exists.
+   // Initialize the state for the list of applications using data from local storage, falling back to mock data if none is found.
    const [applications, setApplications] =
   useState<JobApplication[]>(() => {
     const savedApplications = getApplications();
 
-    return savedApplications.length > 0
-      ? savedApplications
-      : mockApplications;
+    return savedApplications ?? mockApplications;
   });
 
     // Initialize the state for the application currently being edited, if any.

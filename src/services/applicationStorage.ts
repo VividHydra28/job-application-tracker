@@ -1,7 +1,5 @@
 import type { JobApplication } from "../types/application";
 
-//----------------------------END OF IMPORTS-----------------------------------------------//
-
 const STORAGE_KEY = "jobApplications";
 
 export function getApplications(): JobApplication[] | null {
@@ -11,7 +9,16 @@ export function getApplications(): JobApplication[] | null {
     return null;
   }
 
-  return JSON.parse(savedApplications);
+  try {
+    return JSON.parse(savedApplications);
+  } catch (error) {
+    console.error(
+      "Failed to load applications from LocalStorage:",
+      error
+    );
+
+    return null;
+  }
 }
 
 export function saveApplications(

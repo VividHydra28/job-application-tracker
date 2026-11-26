@@ -5,6 +5,8 @@ import type { JobApplication, ApplicationStatus } from "../types/application";
 // import type { JobApplication, ApplicationStatus, ApplicationDate } from "../types/application";
 import ApplicationForm from "../components/ApplicationForm";
 import {getApplications,saveApplications} from "../services/applicationStorage";
+import SearchBar from "../components/SearchBar";
+import StatusFilter from "../components/StatusFilter";
 
 //------------------------------------------END OF IMPORTS--------------------------------------------//
 
@@ -83,6 +85,31 @@ function Applications() {
   setEditingApplication(application);
 }
 
+const [searchTerm, setSearchTerm] = useState("");
+
+const [statusFilter, setStatusFilter] =
+  useState<ApplicationStatus | "All">("All");
+
+  const filteredApplications = applications.filter(
+  (application) => {
+    const normalizedSearch = searchTerm.trim().toLowerCase();
+
+    const matchesSearch =
+      application.company
+        .toLowerCase()
+        .includes(normalizedSearch) ||
+      application.position
+        .toLowerCase()
+        .includes(normalizedSearch);
+
+    const matchesStatus =
+      statusFilter === "All" ||
+      application.status === statusFilter;
+
+    return matchesSearch && matchesStatus;
+  }
+);
+
   return (
     <main>
       <h1>Applications</h1>
@@ -97,7 +124,7 @@ function Applications() {
 
       <section>
         {/* Render a list of ApplicationCard components for each application in the state. */}
-        {applications.map((application) => (
+        {filteredApplications.map((application) => (
           <ApplicationCard
             key={application.id}
             application={application}
